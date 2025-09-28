@@ -316,7 +316,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 6px 20px rgba(16, 24, 40, 0.04);
 }
-.partner-card img {
+/* .partner-card img {
   width: 100%;
   max-height: 60px;
   object-fit: contain;
@@ -327,6 +327,19 @@ body {
 .partner-card img:hover {
   filter: none;
   opacity: 1;
+} */
+.partner-card img {
+  width: 122%;
+  max-height: 68px;
+  object-fit: contain;
+  filter: none; /* default = color */
+  opacity: 1; /* full opacity */
+  transition: all 0.3s ease;
+}
+.partner-card img:hover {
+  filter: none; /* keep color */
+  opacity: 1; /* full opacity */
+  transform: scale(1.05); /* subtle zoom on hover */
 }
 
 /* footer */

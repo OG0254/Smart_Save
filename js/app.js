@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               labels: data.impact.months || [],
               datasets: [
                 {
-                  label: 'Average Monthly Savings ($)',
+                  label: 'Average Monthly Savings (Kes)',
                   data: data.impact.savings || [],
                   backgroundColor: '#27ae60',
                   borderRadius: 8,
