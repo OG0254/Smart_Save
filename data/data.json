@@ -2,7 +2,7 @@
   "meta": {
     "project": "SmartSave (seeded demo)",
     "version": "2025-09-28-seed",
-    "notes": "Seeded demo data — replace with real pilot data before fundraising."
+    "notes": "Seeded demo data replace with real pilot data before fundraising."
   },
   "hero": {
     "familiesReached": 1240,
@@ -44,14 +44,14 @@
   "testimonials": [
     {
       "name": "Jane W., Nairobi",
-      "text": "SmartSave helped me map monthly expenses and save for school fees — I saved Ksh 12,000 in 6 months.",
+      "text": "SmartSave helped me map monthly expenses and save for school fees. I saved Ksh 12,000 in 6 months.",
       "date": "2025-04-18",
       "location": "Nairobi",
       "consent": true
     },
     {
       "name": "Samuel K., Kisumu",
-      "text": "The templates made planning simple — I reduced food overspend by 20%.",
+      "text": "The templates made planning simple. I reduced food overspend by 20%.",
       "date": "2025-03-05",
       "location": "Kisumu",
       "consent": true
@@ -90,9 +90,9 @@
       "2025-07",
       "2025-09"
     ],
-    "savings": [200, 350, 560, 780, 900],
-    "avgMonthlySavings": [200, 350, 560, 780, 900],
-    "householdsAbovePoverty": [50, 120, 210, 370, 520, 740],
+    "savings": [200, 350, 560, 780, 900, 1200, 1500],
+    "avgMonthlySavings": [200, 350, 560, 780, 900, 1300, 1500],
+    "householdsAbovePoverty": [50, 120, 210, 370, 520, 740, 850, 1500],
     "breakdownLabels": ["Savings", "Needs", "Wants"],
     "breakdown": [40, 45, 15]
   },
