@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartSave | Impact</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="impact.html" class="active">Impact</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main class="impact-page container">
+      <section class="impact-intro">
+        <h1>Our Impact</h1>
+        <p>
+          SmartSave is empowering individuals and communities to escape poverty through better
+          financial planning. Here’s how we’re making a measurable and human difference.
+        </p>
+      </section>
+
+      <!-- Charts Section -->
+      <section class="impact-charts">
+        <h2>Measurable Results</h2>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <canvas id="householdsChart"></canvas>
+            <p class="chart-caption">Households lifted above poverty line (2019–2025)</p>
+          </div>
+          <div class="chart-card">
+            <canvas id="savingsChart"></canvas>
+            <p class="chart-caption">Average monthly savings per participant</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stories Section -->
+      <section class="impact-stories">
+        <h2>Human Stories</h2>
+        <div class="stories-grid">
+          <article class="story-card">
+            <img src="images/story1.jpg" alt="Photo of Mary" />
+            <blockquote>
+              “With SmartSave, I finally learned how to track my expenses. I’ve saved enough to open
+              a small food kiosk.”
+            </blockquote>
+            <p class="story-author">— Mary, Nairobi</p>
+          </article>
+
+          <article class="story-card">
+            <img src="images/story2.jpg" alt="Photo of James" />
+            <blockquote>
+              “Before, I had no idea where my money was going. Now, I’m saving for my children’s
+              education.”
+            </blockquote>
+            <p class="story-author">— James, Kisumu</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="impact-cta">
+        <h2>Be Part of the Change</h2>
+        <p>
+          Your support can help us reach more communities and break the cycle of poverty. Join us
+          today.
+        </p>
+        <a href="contact.html" class="btn">Support SmartSave</a>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 SmartSave | SDG 1: No Poverty</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

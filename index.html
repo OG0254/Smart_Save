@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SmartSave — Prototype</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="navbar">
+      <div class="container nav-inner">
+        <div class="brand">SmartSave</div>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html" class="active">Home</a>
+          <a href="features.html">Features</a>
+          <a href="impact.html">Impact</a>
+          <a href="about.html">About</a>
+          <a href="team.html">Team</a>
+          <a href="contact.html">Scholarship</a>
+        </nav>
+        <div class="burger" onclick="toggleMenu()">☰</div>
+      </div>
+    </header>
+
+    <main class="container" id="main">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-card">
+          <div class="hero-grid">
+            <div>
+              <h1 id="hero-title">
+                Help families save
+                <span class="ksh">Ksh <span id="hero-metric">...</span></span> per month
+              </h1>
+              <p class="small-muted">
+                Demonstration prototype — bilingual support available (EN / SW).
+              </p>
+              <div class="cta-row">
+                <button class="btn" onclick="location.href='features.html'">
+                  Explore Features
+                </button>
+                <button class="btn ghost" onclick="location.href='impact.html'">See Impact</button>
+                <button class="btn" onclick="showEmailModal()">Join Pilot</button>
+              </div>
+            </div>
+            <div class="hero-img">
+              <img src="assets/images/hero-placeholder.jpg" alt="Illustration — prototype" />
+              <div class="small-muted">Illustration — prototype</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3-step -->
+      <section class="steps">
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>1. Learn / Jifunze</h3>
+            <p class="small-muted">Understand income and expenses using simple tools.</p>
+          </div>
+          <div class="card">
+            <h3>2. Save / Hifadhi</h3>
+            <p class="small-muted">Set small monthly amounts and watch them grow.</p>
+          </div>
+          <div class="card">
+            <h3>3. Grow / Kua</h3>
+            <p class="small-muted">Reach financial goals and reduce borrowing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section>
+        <h2>User Stories (Illustrative)</h2>
+        <div id="testimonials" class="grid grid-2"></div>
+      </section>
+
+      <!-- Mini impact summary -->
+      <section>
+        <div class="card snapshot">
+          <h3>Snapshot</h3>
+          <div class="snapshot-grid">
+            <div>
+              <strong id="snap-families">-</strong>
+              <div class="small-muted">Families reached (demo)</div>
+            </div>
+            <div>
+              <strong id="snap-savings">-</strong>
+              <div class="small-muted">Avg savings / month (demo)</div>
+            </div>
+            <div>
+              <strong id="snap-retention">-</strong>
+              <div class="small-muted">Retention (demo)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section>
+        <div class="card cta">
+          <div>
+            <h3>Prepare your scholarship pitch</h3>
+            <p class="small-muted">
+              This prototype demonstrates UX and measurement intent. Swap in your real texts &
+              images before live fundraising.
+            </p>
+          </div>
+          <div>
+            <button class="btn" onclick="downloadTemplates()">Download Templates</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partners -->
+      <section class="partners">
+        <h2>Our Partners</h2>
+        <p class="small-muted">Placeholder logos — swap in real collaborators when confirmed.</p>
+        <div class="partners-logos">
+          <div class="partner-card">
+            <img src="assets/images/partner1-placeholder.png" alt="Partner 1" />
+          </div>
+          <div class="partner-card">
+            <img src="assets/images/partner2-placeholder.png" alt="Partner 2" />
+          </div>
+          <div class="partner-card">
+            <img src="assets/images/partner3-placeholder.png" alt="Partner 3" />
+          </div>
+          <div class="partner-card">
+            <img src="assets/images/partner4-placeholder.png" alt="Partner 4" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">Made with ❤️ for SDG 1 — SmartSave Prototype</div>
+    </footer>
+
+    <!-- Email modal -->
+    <div id="email-modal" class="modal" role="dialog" aria-hidden="true">
+      <div class="modal-card">
+        <button style="float: right" onclick="closeEmailModal()">✕</button>
+        <h3>Join Pilot / Jiunge</h3>
+        <p class="small-muted">Leave your email to get updates about the pilot (demo only).</p>
+        <form id="lead-form">
+          <label for="lead-email">Email</label>
+          <input id="lead-email" type="email" required placeholder="you@example.com" />
+          <div style="margin-top: 10px">
+            <button type="submit" class="btn">Send</button>
+            <button type="button" class="btn ghost" onclick="closeEmailModal()">Close</button>
+          </div>
+          <p id="lead-msg" class="small-muted"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "synthetic": true,
+    "generated_at": "2025-09-27",
+    "note": "Synthetic dataset used for UI/demo. Replace with pilot data later."
+  },
+  "hero": {
+    "familiesReached": 1200,
+    "avgSavings": 350
+  },
+  "testimonials": [
+    {
+      "name": "Amina",
+      "text": "SmartSave helped me plan monthly savings and avoid borrowing.",
+      "image": "assets/images/test1.jpg"
+    },
+    {
+      "name": "Peter",
+      "text": "Simple tools, big changes — I can see where my money goes.",
+      "image": "assets/images/test1.jpg"
+    }
+  ],
+  "features": [
+    {
+      "id": "budget-calculator",
+      "title": "Budget Calculator",
+      "desc": "Break down income and fixed/variable expenses to find your net savings.",
+      "tips": "Include all incomes and repeat expenses. Round amounts to simplify planning."
+    },
+    {
+      "id": "savings-goal-tracker",
+      "title": "Savings Goal Tracker",
+      "desc": "Set a target and track monthly progress with projected finish date.",
+      "tips": "Start with a small, consistent monthly amount and increase over time."
+    },
+    {
+      "id": "templates",
+      "title": "Downloadable Templates",
+      "desc": "Use our starter budget templates to plan offline and teach others.",
+      "tips": "Share templates with household members to align saving goals."
+    }
+  ],
+  "impact": {
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    "avgSavings": [300, 320, 340, 360, 370, 380],
+    "spendingBreakdown": [
+      { "category": "Food", "value": 45 },
+      { "category": "Education", "value": 20 },
+      { "category": "Healthcare", "value": 15 },
+      { "category": "Savings", "value": 20 }
+    ],
+    "totalFamilies": 1200,
+    "avgSavingsPerFamily": 350,
+    "reducedBorrowing": 60,
+    "retention": 85
+  },
+  "donationOptions": [
+    { "amount": 500, "message": "Feeds a household for a week" },
+    { "amount": 1000, "message": "Supports a family's savings workshop" },
+    { "amount": 2500, "message": "Supports educational materials for families" }
+  ],
+  "donorTiers": [
+    { "level": "Bronze", "amount": 10000, "benefit": "Name on supporter list" },
+    { "level": "Silver", "amount": 50000, "benefit": "Feature in newsletter" },
+    { "level": "Gold", "amount": 100000, "benefit": "VIP recognition" }
+  ]
+}
