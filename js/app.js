@@ -58,7 +58,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const ctaImpact = qs('#cta-impact');
   if (ctaImpact) ctaImpact.addEventListener('click', () => (location.href = 'impact.html'));
   const ctaJoin = qs('#cta-join');
-  if (ctaJoin) ctaJoin.addEventListener('click', showEmailModal);
+  if (ctaJoin) ctaJoin.addEventListener('click', () => (location.href = 'contact.html'));
+
+  /*showEmailModal);*/
 
   // Lead form
   const leadForm = qs('#lead-form');
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       (qs('#snap-retention').textContent =
         data.impact && data.impact.retention ? data.impact.retention + '%' : 'N/A');
 
-    // mini home chart
+    // mini home chart - compact, maintainAspectRatio:false so it fills container
     if (typeof Chart !== 'undefined' && qs('#miniHomeChart')) {
       const ctx = qs('#miniHomeChart').getContext('2d');
       new Chart(ctx, {
@@ -103,7 +105,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             },
           ],
         },
-        options: { plugins: { legend: { display: false } }, maintainAspectRatio: false },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } },
+        },
       });
     }
   }
@@ -183,12 +190,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.warn('Chart.js not loaded');
         return;
       }
+
+      // Build meaningful labels: fallback "Expense 1" etc. and ensure legend shows amounts
+      const sanitizedLabels = names.map((n, i) => (n && n.trim() ? n.trim() : `Expense ${i + 1}`));
       const ctx = qs('#budgetChart').getContext('2d');
+
       if (window._budgetChart) window._budgetChart.destroy();
+
       window._budgetChart = new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: names,
+          labels: sanitizedLabels,
           datasets: [
             {
               data: values,
@@ -196,7 +208,41 @@ document.addEventListener('DOMContentLoaded', async () => {
             },
           ],
         },
-        options: { responsive: true, plugins: { legend: { position: 'bottom' } } },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // fill the .chart-wrap container
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                generateLabels: function (chart) {
+                  const data = chart.data;
+                  if (!data || !data.datasets || !data.datasets.length) return [];
+                  const dataset = data.datasets[0];
+                  return data.labels.map((label, i) => {
+                    const val = dataset.data[i] || 0;
+                    return {
+                      text: `${label} — Ksh ${Number(val).toLocaleString()}`,
+                      fillStyle: dataset.backgroundColor[i],
+                      strokeStyle: dataset.backgroundColor[i],
+                      hidden: false,
+                      index: i,
+                    };
+                  });
+                },
+              },
+            },
+            tooltip: {
+              callbacks: {
+                label: function (ctx) {
+                  const val = ctx.parsed || 0;
+                  return `Ksh ${Number(val).toLocaleString()}`;
+                },
+              },
+            },
+          },
+          layout: { padding: 6 },
+        },
       });
     });
   }
@@ -221,22 +267,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function updateSavingsUI(goal, monthly) {
-    const savedSoFar = 0; // we don't track incremental months; placeholder
-    const pct = goal > 0 ? Math.min((savedSoFar / goal) * 100, 100) : 0;
-    const months = monthly > 0 ? Math.ceil(goal / monthly) : 0;
+    let savedSoFar = monthly * 1; // placeholder: assume first month saved
+    let percentage = Math.min((savedSoFar / goal) * 100, 100);
+    let monthsNeeded = monthly > 0 ? Math.ceil(goal / monthly) : 0;
+
+    // Update UI
     qs('#saved-amount') && (qs('#saved-amount').textContent = savedSoFar.toLocaleString());
     qs('#goal-display') && (qs('#goal-display').textContent = goal.toLocaleString());
-    qs('#timeline') && (qs('#timeline').textContent = months + ' months');
-    qs('#progress-fill') && (qs('#progress-fill').style.width = pct + '%');
+    qs('#timeline') && (qs('#timeline').textContent = monthsNeeded + ' months');
 
-    const msgEl = qs('#motivation-message');
-    if (!msgEl) return;
-    if (pct === 0) msgEl.textContent = 'Start your journey today!';
-    else if (pct < 25) msgEl.textContent = 'Just starting out – stay consistent!';
-    else if (pct < 50) msgEl.textContent = 'Great progress! Keep pushing.';
-    else if (pct < 75) msgEl.textContent = 'You’re over halfway – don’t stop now!';
-    else if (pct < 100) msgEl.textContent = 'Almost there, stay focused!';
-    else msgEl.textContent = 'Congratulations! Goal achieved 🎉';
+    qs('#progress-fill') && (qs('#progress-fill').style.width = percentage + '%');
+
+    // Motivational messages
+    const motivationMessage = qs('#motivation-message');
+    if (!motivationMessage) return;
+    if (percentage === 0) {
+      motivationMessage.textContent = 'Start your journey today!';
+    } else if (percentage < 25) {
+      motivationMessage.textContent = 'Just starting out – stay consistent!';
+    } else if (percentage < 50) {
+      motivationMessage.textContent = 'Great progress! Keep pushing.';
+    } else if (percentage < 75) {
+      motivationMessage.textContent = 'You’re over halfway – don’t stop now!';
+    } else if (percentage < 100) {
+      motivationMessage.textContent = 'Almost there, stay focused!';
+    } else {
+      motivationMessage.textContent = 'Congratulations! Goal achieved 🎉';
+    }
   }
 
   // Templates modal: populate cards from data.templates or fallback
@@ -368,36 +425,64 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (qs('#savingsChart') && data.impact) {
     // savings chart
     if (typeof Chart !== 'undefined') {
-      const sctx = qs('#savingsChart').getContext('2d');
-      new Chart(sctx, {
-        type: 'bar',
-        data: {
-          labels: data.impact.months,
-          datasets: [
-            {
-              label: 'Avg savings',
-              data: data.impact.savings,
-              backgroundColor: '#0b5ed7',
-              borderRadius: 8,
+      const sctx = qs('#savingsChart');
+      if (sctx) {
+        try {
+          const ctx = sctx.getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.impact.months || [],
+              datasets: [
+                {
+                  label: 'Average Monthly Savings ($)',
+                  data: data.impact.savings || [],
+                  backgroundColor: '#27ae60',
+                  borderRadius: 8,
+                },
+              ],
             },
-          ],
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } },
-      });
-      const bctx = qs('#breakdownChart').getContext('2d');
-      new Chart(bctx, {
-        type: 'pie',
-        data: {
-          labels: data.impact.breakdownLabels || ['Savings', 'Needs', 'Wants'],
-          datasets: [
-            { data: data.impact.breakdown, backgroundColor: ['#0b5ed7', '#ff9800', '#4caf50'] },
-          ],
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom' } } },
-      });
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: { y: { beginAtZero: true } },
+            },
+          });
+        } catch (e) {
+          console.warn('savingsChart render error', e);
+        }
+      }
+      const bctxEl = qs('#breakdownChart');
+      if (bctxEl) {
+        try {
+          const ctx2 = bctxEl.getContext('2d');
+          new Chart(ctx2, {
+            type: 'pie',
+            data: {
+              labels: data.impact.breakdownLabels || ['Savings', 'Needs', 'Wants'],
+              datasets: [
+                {
+                  label: 'Breakdown',
+                  data: data.impact.breakdown || [],
+                  backgroundColor: ['#0b5ed7', '#ff9800', '#4caf50'],
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: 'bottom' } },
+            },
+          });
+        } catch (e) {
+          console.warn('breakdownChart render error', e);
+        }
+      }
     } else {
       console.warn('Chart.js not loaded for impact charts');
     }
+
     // stories
     if (data.testimonials && qs('#impact-stories')) {
       const root = qs('#impact-stories');

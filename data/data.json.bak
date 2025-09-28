@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "familiesReached": 120,
+    "avgSavings": 1250
+  },
+  "features": [
+    {
+      "id": "budget-calculator",
+      "title": "Budget Calculator",
+      "desc": "Enter income and key expenses to see where your money goes.",
+      "tips": [
+        "Always track both fixed and variable expenses.",
+        "Review your budget monthly to adjust for changes.",
+        "Set aside 5-10% for emergencies."
+      ]
+    },
+    {
+      "id": "savings-tracker",
+      "title": "Savings Goal Tracker",
+      "desc": "Set a target and track monthly contributions.",
+      "tips": [
+        "Break large goals into smaller milestones.",
+        "Automate transfers if you can.",
+        "Celebrate small wins to stay motivated."
+      ]
+    },
+    {
+      "id": "templates",
+      "title": "Downloadable Templates",
+      "desc": "Printable and spreadsheet templates for budgets.",
+      "tips": [
+        "Use Excel template for auto-calculations.",
+        "PDF is good for printing and offline planning."
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Jane, Nairobi",
+      "text": "I saved Ksh 500 each week and now I have an emergency fund."
+    },
+    { "name": "Samuel, Mombasa", "text": "The templates made planning money simple." }
+  ],
+  "impact": {
+    "months": ["Jan", "Feb", "Mar", "Apr", "May"],
+    "savings": [400, 700, 1250, 1400, 1600],
+    "breakdown": [40, 30, 20],
+    "breakdownLabels": ["Savings", "Needs", "Wants"],
+    "retention": 85
+  },
+  "templates": [
+    {
+      "id": "pdf",
+      "title": "Budget Planner (PDF)",
+      "desc": "Printable planner",
+      "thumb": "assets/images/pdf-thumb.png",
+      "file": "templates/budget-template.pdf"
+    },
+    {
+      "id": "xlsx",
+      "title": "Smart Budget (Excel)",
+      "desc": "Interactive sheet",
+      "thumb": "assets/images/excel-thumb.png",
+      "file": "templates/budget-template.xlsx"
+    }
+  ],
+  "donationOptions": [500, 1000, 2500]
+}

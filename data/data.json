@@ -1,13 +1,19 @@
 {
+  "meta": {
+    "project": "SmartSave (seeded demo)",
+    "version": "2025-09-28-seed",
+    "notes": "Seeded demo data — replace with real pilot data before fundraising."
+  },
   "hero": {
-    "familiesReached": 120,
-    "avgSavings": 1250
+    "familiesReached": 1240,
+    "avgSavings": 1350,
+    "metricExample": 150
   },
   "features": [
     {
       "id": "budget-calculator",
       "title": "Budget Calculator",
-      "desc": "Enter income and key expenses to see where your money goes.",
+      "desc": "Enter income and key expenses to see where your money goes and identify quick cuts.",
       "tips": [
         "Always track both fixed and variable expenses.",
         "Review your budget monthly to adjust for changes.",
@@ -29,24 +35,66 @@
       "title": "Downloadable Templates",
       "desc": "Printable and spreadsheet templates for budgets.",
       "tips": [
-        "Use Excel template for auto-calculations.",
-        "PDF is good for printing and offline planning."
+        "Use the Excel template if you want formulas to auto-calculate.",
+        "PDF templates are better for printing and quick notes.",
+        "Customize the categories to reflect your own lifestyle."
       ]
     }
   ],
   "testimonials": [
     {
-      "name": "Jane, Nairobi",
-      "text": "I saved Ksh 500 each week and now I have an emergency fund."
+      "name": "Jane W., Nairobi",
+      "text": "SmartSave helped me map monthly expenses and save for school fees — I saved Ksh 12,000 in 6 months.",
+      "date": "2025-04-18",
+      "location": "Nairobi",
+      "consent": true
     },
-    { "name": "Samuel, Mombasa", "text": "The templates made planning money simple." }
+    {
+      "name": "Samuel K., Kisumu",
+      "text": "The templates made planning simple — I reduced food overspend by 20%.",
+      "date": "2025-03-05",
+      "location": "Kisumu",
+      "consent": true
+    },
+    {
+      "name": "Aisha N., Nairobi",
+      "text": "SmartSave helped me start a small emergency fund.",
+      "date": "2025-07-15",
+      "location": "Nairobi",
+      "consent": true
+    },
+    {
+      "name": "David M., Kisumu",
+      "text": "I cut unnecessary spending and saved for school fees.",
+      "date": "2025-07-15",
+      "location": "Kisumu",
+      "consent": true
+    },
+    {
+      "name": "Grace O., Nairobi",
+      "text": "The templates are clear and easy to use.",
+      "date": "2025-07-15",
+      "location": "Nairobi",
+      "consent": true
+    }
   ],
   "impact": {
-    "months": ["Jan", "Feb", "Mar", "Apr", "May"],
-    "savings": [400, 700, 1250, 1400, 1600],
-    "breakdown": [40, 30, 20],
+    "retention": 82,
+    "months": [
+      "2024-01",
+      "2024-04",
+      "2024-07",
+      "2024-10",
+      "2025-01",
+      "2025-04",
+      "2025-07",
+      "2025-09"
+    ],
+    "savings": [200, 350, 560, 780, 900],
+    "avgMonthlySavings": [200, 350, 560, 780, 900],
+    "householdsAbovePoverty": [50, 120, 210, 370, 520, 740],
     "breakdownLabels": ["Savings", "Needs", "Wants"],
-    "retention": 85
+    "breakdown": [40, 45, 15]
   },
   "templates": [
     {
@@ -63,6 +111,11 @@
       "thumb": "assets/images/excel-thumb.png",
       "file": "templates/budget-template.xlsx"
     }
+  ],
+  "partners": [
+    { "id": "p-01", "name": "CommunityBank", "logo": "assets/images/partner1-placeholder.png" },
+    { "id": "p-02", "name": "LocalNGO", "logo": "assets/images/partner2-placeholder.png" },
+    { "id": "p-03", "name": "CityCouncil", "logo": "assets/images/partner3-placeholder.png" }
   ],
   "donationOptions": [500, 1000, 2500]
 }

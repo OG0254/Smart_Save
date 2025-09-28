@@ -213,6 +213,19 @@ body {
 .results p {
   margin: 6px 0;
 }
+/* Compact chart container for budget pie (add to css/styles.css) */
+.chart-wrap {
+  max-width: 420px; /* maximum width for the chart */
+  width: 100%;
+  height: 320px; /* fixed display height so Chart.js can fill it */
+  margin: 12px 0;
+}
+
+.chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
 
 /* progress */
 .progress-bar {
@@ -351,4 +364,29 @@ body {
   .burger {
     display: block;
   }
+}
+/* === Chart containers fix === */
+.chart-container {
+  max-width: 380px; /* reduce width */
+  max-height: 280px; /* reduce height */
+  margin: 0 auto 18px auto; /* center + spacing */
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+/* Control chart size globally*/
+canvas {
+  max-width: 420px !important; /* reduce width */
+  max-height: 320px !important; /* reduce height */
+}
+
+/* Optional: specifically for impact page charts */
+.impact-page canvas {
+  max-width: 400px !important;
+  max-height: 300px !important;
+  margin: 0 auto;
+  display: block;
 }
