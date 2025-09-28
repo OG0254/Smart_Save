@@ -8,9 +8,10 @@
   </head>
   <body>
     <!-- NAV -->
-    <header class="navbar">
+    <header class="navbar" role="banner">
       <div class="container nav-inner">
-        <div class="brand">SmartSave</div>
+        <div class="brand" aria-label="SmartSave brand">SmartSave</div>
+
         <nav class="nav-links" aria-label="Main navigation">
           <a href="index.html" class="active">Home</a>
           <a href="features.html">Features</a>
@@ -19,34 +20,53 @@
           <a href="team.html">Team</a>
           <a href="contact.html">Scholarship</a>
         </nav>
-        <div class="burger" onclick="toggleMenu()">☰</div>
+
+        <button class="burger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
       </div>
     </header>
 
-    <main class="container" id="main">
-      <!-- Hero -->
-      <section class="hero">
+    <main class="container" id="main" role="main">
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-card">
-          <div class="hero-grid">
-            <div>
-              <h1 id="hero-title">
-                Help families save
-                <span class="ksh">Ksh <span id="hero-metric">...</span></span> per month
-              </h1>
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 id="hero-title">Empower families to save and break the cycle of poverty</h1>
               <p class="small-muted">
-                Demonstration prototype — bilingual support available (EN / SW).
+                SmartSave helps households plan budgets, track savings and reach goals — starting
+                with as little as
+                <strong>Ksh <span id="hero-metric">100</span> / month</strong>.
               </p>
+
               <div class="cta-row">
-                <button class="btn" onclick="location.href='features.html'">
-                  Explore Features
-                </button>
-                <button class="btn ghost" onclick="location.href='impact.html'">See Impact</button>
-                <button class="btn" onclick="showEmailModal()">Join Pilot</button>
+                <button class="btn" id="cta-features">Try the Budget Tools</button>
+                <button class="btn ghost" id="cta-impact">See Our Impact</button>
+                <button class="btn" id="cta-join">Join Pilot</button>
               </div>
+
+              <p class="small-muted micro">
+                No jargon. Localized tips. Mobile-first for low-data users.
+              </p>
             </div>
-            <div class="hero-img">
-              <img src="assets/images/hero-placeholder.jpg" alt="Illustration — prototype" />
-              <div class="small-muted">Illustration — prototype</div>
+
+            <div class="hero-side">
+              <img
+                src="assets/images/hero-placeholder.jpg"
+                alt="Families planning finances together — prototype illustration"
+              />
+              <div class="kpi-row">
+                <div class="kpi">
+                  <div class="kpi-value" id="snap-families">-</div>
+                  <div class="kpi-label">Families</div>
+                </div>
+                <div class="kpi">
+                  <div class="kpi-value" id="snap-savings">-</div>
+                  <div class="kpi-label">Avg / month</div>
+                </div>
+              </div>
+              <div style="margin-top: 10px">
+                <canvas id="miniHomeChart" width="260" height="120" aria-hidden="true"></canvas>
+              </div>
             </div>
           </div>
         </div>
@@ -76,22 +96,22 @@
         <div id="testimonials" class="grid grid-2"></div>
       </section>
 
-      <!-- Mini impact summary -->
+      <!-- Snapshot -->
       <section>
         <div class="card snapshot">
           <h3>Snapshot</h3>
           <div class="snapshot-grid">
             <div>
-              <strong id="snap-families">-</strong>
-              <div class="small-muted">Families reached (demo)</div>
+              <strong id="snap-families-2">-</strong>
+              <div class="small-muted">Families reached</div>
             </div>
             <div>
-              <strong id="snap-savings">-</strong>
-              <div class="small-muted">Avg savings / month (demo)</div>
+              <strong id="snap-savings-2">-</strong>
+              <div class="small-muted">Avg savings / month</div>
             </div>
             <div>
               <strong id="snap-retention">-</strong>
-              <div class="small-muted">Retention (demo)</div>
+              <div class="small-muted">Retention</div>
             </div>
           </div>
         </div>
@@ -108,12 +128,12 @@
             </p>
           </div>
           <div>
-            <button class="btn" onclick="downloadTemplates()">Download Templates</button>
+            <button class="btn" id="btn-download-templates">Download Templates</button>
           </div>
         </div>
       </section>
 
-      <!-- Partners -->
+      <!-- PARTNERS -->
       <section class="partners">
         <h2>Our Partners</h2>
         <p class="small-muted">Placeholder logos — swap in real collaborators when confirmed.</p>
@@ -139,23 +159,24 @@
     </footer>
 
     <!-- Email modal -->
-    <div id="email-modal" class="modal" role="dialog" aria-hidden="true">
+    <div id="email-modal" class="modal" aria-hidden="true">
       <div class="modal-card">
-        <button style="float: right" onclick="closeEmailModal()">✕</button>
+        <button class="modal-close" aria-label="Close" onclick="closeEmailModal()">✕</button>
         <h3>Join Pilot / Jiunge</h3>
         <p class="small-muted">Leave your email to get updates about the pilot (demo only).</p>
         <form id="lead-form">
           <label for="lead-email">Email</label>
           <input id="lead-email" type="email" required placeholder="you@example.com" />
           <div style="margin-top: 10px">
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn ghost" onclick="closeEmailModal()">Close</button>
+            <button class="btn" type="submit">Send</button>
+            <button class="btn ghost" type="button" onclick="closeEmailModal()">Close</button>
           </div>
-          <p id="lead-msg" class="small-muted"></p>
+          <p id="lead-msg" class="small-muted" style="margin-top: 8px"></p>
         </form>
       </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/app.js"></script>
   </body>

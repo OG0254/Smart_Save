@@ -1,67 +1,68 @@
 {
-  "meta": {
-    "synthetic": true,
-    "generated_at": "2025-09-27",
-    "note": "Synthetic dataset used for UI/demo. Replace with pilot data later."
-  },
   "hero": {
-    "familiesReached": 1200,
-    "avgSavings": 350
+    "familiesReached": 120,
+    "avgSavings": 1250
   },
-  "testimonials": [
-    {
-      "name": "Amina",
-      "text": "SmartSave helped me plan monthly savings and avoid borrowing.",
-      "image": "assets/images/test1.jpg"
-    },
-    {
-      "name": "Peter",
-      "text": "Simple tools, big changes — I can see where my money goes.",
-      "image": "assets/images/test1.jpg"
-    }
-  ],
   "features": [
     {
       "id": "budget-calculator",
       "title": "Budget Calculator",
-      "desc": "Break down income and fixed/variable expenses to find your net savings.",
-      "tips": "Include all incomes and repeat expenses. Round amounts to simplify planning."
+      "desc": "Enter income and key expenses to see where your money goes.",
+      "tips": [
+        "Always track both fixed and variable expenses.",
+        "Review your budget monthly to adjust for changes.",
+        "Set aside 5-10% for emergencies."
+      ]
     },
     {
-      "id": "savings-goal-tracker",
+      "id": "savings-tracker",
       "title": "Savings Goal Tracker",
-      "desc": "Set a target and track monthly progress with projected finish date.",
-      "tips": "Start with a small, consistent monthly amount and increase over time."
+      "desc": "Set a target and track monthly contributions.",
+      "tips": [
+        "Break large goals into smaller milestones.",
+        "Automate transfers if you can.",
+        "Celebrate small wins to stay motivated."
+      ]
     },
     {
       "id": "templates",
       "title": "Downloadable Templates",
-      "desc": "Use our starter budget templates to plan offline and teach others.",
-      "tips": "Share templates with household members to align saving goals."
+      "desc": "Printable and spreadsheet templates for budgets.",
+      "tips": [
+        "Use Excel template for auto-calculations.",
+        "PDF is good for printing and offline planning."
+      ]
     }
   ],
+  "testimonials": [
+    {
+      "name": "Jane, Nairobi",
+      "text": "I saved Ksh 500 each week and now I have an emergency fund."
+    },
+    { "name": "Samuel, Mombasa", "text": "The templates made planning money simple." }
+  ],
   "impact": {
-    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    "avgSavings": [300, 320, 340, 360, 370, 380],
-    "spendingBreakdown": [
-      { "category": "Food", "value": 45 },
-      { "category": "Education", "value": 20 },
-      { "category": "Healthcare", "value": 15 },
-      { "category": "Savings", "value": 20 }
-    ],
-    "totalFamilies": 1200,
-    "avgSavingsPerFamily": 350,
-    "reducedBorrowing": 60,
+    "months": ["Jan", "Feb", "Mar", "Apr", "May"],
+    "savings": [400, 700, 1250, 1400, 1600],
+    "breakdown": [40, 30, 20],
+    "breakdownLabels": ["Savings", "Needs", "Wants"],
     "retention": 85
   },
-  "donationOptions": [
-    { "amount": 500, "message": "Feeds a household for a week" },
-    { "amount": 1000, "message": "Supports a family's savings workshop" },
-    { "amount": 2500, "message": "Supports educational materials for families" }
+  "templates": [
+    {
+      "id": "pdf",
+      "title": "Budget Planner (PDF)",
+      "desc": "Printable planner",
+      "thumb": "assets/images/pdf-thumb.png",
+      "file": "templates/budget-template.pdf"
+    },
+    {
+      "id": "xlsx",
+      "title": "Smart Budget (Excel)",
+      "desc": "Interactive sheet",
+      "thumb": "assets/images/excel-thumb.png",
+      "file": "templates/budget-template.xlsx"
+    }
   ],
-  "donorTiers": [
-    { "level": "Bronze", "amount": 10000, "benefit": "Name on supporter list" },
-    { "level": "Silver", "amount": 50000, "benefit": "Feature in newsletter" },
-    { "level": "Gold", "amount": 100000, "benefit": "VIP recognition" }
-  ]
+  "donationOptions": [500, 1000, 2500]
 }

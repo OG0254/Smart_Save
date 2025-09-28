@@ -1,42 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartSave | Features</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SmartSave — Features</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="features.html" class="active">Features</a></li>
-          <li><a href="impact.html">Impact</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <div class="brand">SmartSave</div>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="features.html" class="active">Features</a>
+          <a href="impact.html">Impact</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <button class="burger" onclick="toggleMenu()">☰</button>
+      </div>
     </header>
 
-    <main>
+    <main class="container">
+      <section class="features-intro">
+        <h1>Interactive Demo — Features</h1>
+        <p class="small-muted">Try the tools below — everything is client-side and demo-ready.</p>
+      </section>
+
       <!-- Budget Calculator -->
       <section id="budget-calculator" class="feature-card">
         <h2>Budget Calculator</h2>
         <form id="budget-form">
-          <label for="income">Monthly Income:</label>
-          <input type="number" id="income" required />
+          <div class="form-row">
+            <label for="income">Monthly Income (Ksh)</label>
+            <input type="number" id="income" placeholder="e.g., 50000" required />
+          </div>
+
           <div id="expenses-container">
+            <label>Expenses</label>
             <div class="expense-item">
-              <input type="text" class="expense-name" placeholder="Expense name" />
-              <input type="number" class="expense-amount" placeholder="Amount" />
+              <input type="text" name="expense-name" class="expense-name" placeholder="Rent" />
+              <input type="number" name="expense-value" class="expense-value" placeholder="12000" />
+              <button type="button" class="remove-expense" aria-label="Remove">✕</button>
+            </div>
+            <div class="expense-item">
+              <input type="text" name="expense-name" class="expense-name" placeholder="Food" />
+              <input type="number" name="expense-value" class="expense-value" placeholder="8000" />
+              <button type="button" class="remove-expense" aria-label="Remove">✕</button>
             </div>
           </div>
-          <button type="button" id="add-expense">+ Add Expense</button>
-          <button type="submit">Generate Chart</button>
+
+          <div class="form-actions">
+            <button type="button" id="add-expense" class="btn">+ Add Expense</button>
+            <button type="submit" class="btn">Generate Chart</button>
+          </div>
         </form>
-        <div class="chart-container">
-          <canvas id="budget-chart"></canvas>
+
+        <div class="results">
+          <p>Total Income: Ksh <span id="display-income">0</span></p>
+          <p>Total Expenses: Ksh <span id="display-expenses">0</span></p>
+          <p>
+            <strong>Remaining Balance: Ksh <span id="display-balance">0</span></strong>
+          </p>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas
+            id="budgetChart"
+            width="420"
+            height="300"
+            aria-label="Budget breakdown chart"
+          ></canvas>
         </div>
       </section>
 
@@ -44,48 +78,57 @@
       <section id="savings-tracker" class="feature-card">
         <h2>Savings Goal Tracker</h2>
         <form id="savings-form">
-          <label for="goal-amount">Goal Amount:</label>
-          <input type="number" id="goal-amount" required />
-          <label for="monthly-saving">Monthly Saving:</label>
-          <input type="number" id="monthly-saving" required />
-          <button type="submit">Track Progress</button>
+          <div class="form-row">
+            <label for="goal">Goal amount (Ksh)</label>
+            <input type="number" id="goal" placeholder="e.g., 200000" required />
+          </div>
+          <div class="form-row">
+            <label for="monthly">Monthly saving (Ksh)</label>
+            <input type="number" id="monthly" placeholder="e.g., 5000" required />
+          </div>
+          <div class="form-actions">
+            <button class="btn" type="submit">Track</button>
+          </div>
         </form>
-        <div class="progress-bar">
-          <div id="progress-fill"></div>
+
+        <div class="results">
+          <div class="progress-bar" aria-hidden="true"><div id="progress-fill"></div></div>
+          <p>Saved: Ksh <span id="saved-amount">0</span> / Ksh <span id="goal-display">0</span></p>
+          <p>Estimated timeline: <span id="timeline">0 months</span></p>
+          <p id="motivation-message" class="motivation"></p>
         </div>
-        <p id="timeline"></p>
-        <p id="motivation-message" class="motivation"></p>
       </section>
 
-      <!-- Templates Section -->
+      <!-- Templates -->
       <section id="templates" class="feature-card">
         <h2>Downloadable Templates</h2>
-        <p>Access ready-to-use budget and savings templates.</p>
-        <button id="open-templates" class="btn">View Templates</button>
+        <p class="small-muted">Use these to plan and track offline.</p>
+        <button id="view-templates" class="btn">View Templates</button>
       </section>
 
-      <!-- Modal -->
+      <!-- Templates Modal -->
       <div id="templates-modal" class="modal" aria-hidden="true">
         <div class="modal-content">
-          <button id="close-templates" class="close-btn">✕</button>
+          <button class="modal-close" id="close-templates" aria-label="Close">✕</button>
           <h3>Templates</h3>
-          <div class="templates-grid">
-            <div class="template-card">
-              <img src="assets/images/pdf-thumb.png" alt="PDF Template" />
-              <h4>Budget Planner (PDF)</h4>
-              <p>Printable PDF for offline budgeting.</p>
-              <a href="templates/budget-template.pdf" download class="btn">Download PDF</a>
-            </div>
-            <div class="template-card">
-              <img src="assets/images/excel-thumb.png" alt="Excel Template" />
-              <h4>Smart Budget (Excel)</h4>
-              <p>Interactive Excel sheet with formulas.</p>
-              <a href="templates/budget-template.xlsx" download class="btn">Download Excel</a>
-            </div>
+          <div class="templates-grid" id="templates-grid">
+            <!-- Filled by app.js: cards with thumbnail + download. -->
           </div>
         </div>
       </div>
+
+      <!-- Accordion Tips -->
+      <section id="feature-tips" class="feature-card">
+        <h2>SmartSave Tips</h2>
+        <div id="accordion" class="accordion">
+          <!-- Populated from data/data.json -->
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="container">Made with ❤️ for SDG 1 — SmartSave Prototype</div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/app.js"></script>

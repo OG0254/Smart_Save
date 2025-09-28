@@ -1,76 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartSave | About</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SmartSave — About</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
-        <a href="features.html">Features</a>
-        <a href="impact.html">Impact</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <div class="brand">SmartSave</div>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="impact.html">Impact</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="container about-page">
+    <main class="container">
       <section class="about-hero">
         <h1>About SmartSave</h1>
-        <p>
-          We exist to tackle <strong>SDG 1 – No Poverty</strong> by giving people simple, practical
-          tools to manage money and build sustainable savings habits.
+        <p class="small-muted">
+          We build simple financial tools that fit low-data mobile lifestyles and local contexts.
         </p>
       </section>
 
-      <section class="about-values">
-        <h2>Our Core Values</h2>
-        <div class="values-grid">
-          <div class="value-card">
-            <i class="fas fa-hand-holding-usd fa-2x"></i>
-            <h3>Financial Inclusion</h3>
-            <p>
-              SmartSave empowers underserved communities with tools that make money management
-              accessible to all.
-            </p>
-          </div>
-          <div class="value-card">
-            <i class="fas fa-users fa-2x"></i>
-            <h3>Community First</h3>
-            <p>
-              We believe collective financial literacy creates stronger, more resilient families and
-              societies.
-            </p>
-          </div>
-          <div class="value-card">
-            <i class="fas fa-seedling fa-2x"></i>
-            <h3>Sustainability</h3>
-            <p>
-              Every feature is designed to help users grow lasting financial habits, not quick
-              fixes.
-            </p>
-          </div>
+      <section class="values-grid">
+        <div class="card value">
+          <div class="icon">💡</div>
+          <h3>Practical</h3>
+          <p class="small-muted">Short, actionable guidance that people can follow today.</p>
         </div>
-      </section>
-
-      <section class="about-vision">
-        <h2>Our Vision</h2>
-        <p>
-          To make financial literacy and savings culture a norm in every household across Africa,
-          contributing to the eradication of extreme poverty.
-        </p>
+        <div class="card value">
+          <div class="icon">🤝</div>
+          <h3>Community</h3>
+          <p class="small-muted">Built for families and community resilience.</p>
+        </div>
+        <div class="card value">
+          <div class="icon">📊</div>
+          <h3>Data-driven</h3>
+          <p class="small-muted">We measure impact to learn and improve.</p>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2025 SmartSave | SDG 1: No Poverty</p>
+    <footer class="footer">
+      <div class="container">Made with ❤️ for SDG 1 — SmartSave Prototype</div>
     </footer>
+    <script src="js/app.js"></script>
   </body>
 </html>

@@ -1,86 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SmartSave | Impact</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SmartSave — Impact</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="features.html">Features</a>
-        <a href="impact.html" class="active">Impact</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <div class="brand">SmartSave</div>
+        <nav class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="impact.html" class="active">Impact</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="impact-page container">
+    <main class="container impact-page">
       <section class="impact-intro">
         <h1>Our Impact</h1>
-        <p>
-          SmartSave is empowering individuals and communities to escape poverty through better
-          financial planning. Here’s how we’re making a measurable and human difference.
-        </p>
+        <p class="small-muted">Data-driven results plus human stories from the pilot.</p>
       </section>
 
-      <!-- Charts Section -->
       <section class="impact-charts">
-        <h2>Measurable Results</h2>
         <div class="chart-grid">
           <div class="chart-card">
-            <canvas id="householdsChart"></canvas>
-            <p class="chart-caption">Households lifted above poverty line (2019–2025)</p>
+            <h3>Average Savings / Month</h3>
+            <canvas id="savingsChart" width="420" height="240"></canvas>
           </div>
           <div class="chart-card">
-            <canvas id="savingsChart"></canvas>
-            <p class="chart-caption">Average monthly savings per participant</p>
+            <h3>Spending Breakdown</h3>
+            <canvas id="breakdownChart" width="420" height="240"></canvas>
           </div>
         </div>
       </section>
 
-      <!-- Stories Section -->
       <section class="impact-stories">
         <h2>Human Stories</h2>
-        <div class="stories-grid">
-          <article class="story-card">
-            <img src="images/story1.jpg" alt="Photo of Mary" />
-            <blockquote>
-              “With SmartSave, I finally learned how to track my expenses. I’ve saved enough to open
-              a small food kiosk.”
-            </blockquote>
-            <p class="story-author">— Mary, Nairobi</p>
-          </article>
-
-          <article class="story-card">
-            <img src="images/story2.jpg" alt="Photo of James" />
-            <blockquote>
-              “Before, I had no idea where my money was going. Now, I’m saving for my children’s
-              education.”
-            </blockquote>
-            <p class="story-author">— James, Kisumu</p>
-          </article>
+        <div id="impact-stories" class="grid grid-2">
+          <!-- Populated from data/data.json -->
         </div>
       </section>
 
-      <!-- Call to Action -->
-      <section class="impact-cta">
-        <h2>Be Part of the Change</h2>
-        <p>
-          Your support can help us reach more communities and break the cycle of poverty. Join us
-          today.
-        </p>
-        <a href="contact.html" class="btn">Support SmartSave</a>
+      <section class="impact-actions">
+        <button id="download-impact" class="btn">Download impact CSV</button>
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2025 SmartSave | SDG 1: No Poverty</p>
+    <footer class="footer">
+      <div class="container">Made with ❤️ for SDG 1 — SmartSave Prototype</div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
