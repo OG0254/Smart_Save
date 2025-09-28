@@ -4,6 +4,83 @@
   - Uses data/data.json as a source for tips, testimonials, and impact data.
   - Chart.js required for charts (fallback text shown if missing).
 */
+// Profile management
+let activeProfile = null;
+
+// function setProfile(name) {
+//   if (!name) return;
+//   activeProfile = name.trim();
+//   localStorage.setItem('smartsave_activeProfile', activeProfile);
+//   document.getElementById('active-profile').textContent = activeProfile;
+//   loadProfileData();
+// }
+
+function setProfile(name) {
+  if (!name) return;
+  activeProfile = name.trim();
+  localStorage.setItem('smartsave_activeProfile', activeProfile);
+
+  // Update any element(s) that use the id "active-profile".
+  // Prefer updating <strong> elements (common pattern in your HTML).
+  // For any other element with the same id, clear it to avoid duplicate text.
+  document.querySelectorAll('#active-profile').forEach((el) => {
+    const tag = (el.tagName || '').toLowerCase();
+    if (tag === 'strong') {
+      el.textContent = activeProfile; // show just the name inside the strong tag
+    } else {
+      el.textContent = ''; // keep UI clean (avoid duplicate label)
+    }
+  });
+
+  // If there's a profile dropdown, make sure the active profile is present & selected
+  const sel = document.getElementById('profileSelect');
+  if (sel) {
+    const exists = Array.from(sel.options).some((o) => o.value === activeProfile);
+    if (!exists) {
+      const opt = document.createElement('option');
+      opt.value = activeProfile;
+      opt.textContent = activeProfile;
+      sel.appendChild(opt);
+    }
+    sel.value = activeProfile;
+  }
+
+  // Load profile-specific data (keeps your existing logic)
+  if (typeof loadProfileData === 'function') loadProfileData();
+}
+
+function getProfileKey(key) {
+  return `smartsave_${activeProfile}_${key}`;
+}
+
+function loadProfileData() {
+  if (!activeProfile) return;
+
+  // Load Budget Data
+  const budgetData = JSON.parse(localStorage.getItem(getProfileKey('budget'))) || null;
+  if (budgetData) {
+    document.getElementById('income').value = budgetData.income || '';
+    const expensesContainer = document.getElementById('expenses-container');
+    expensesContainer.innerHTML = '';
+    budgetData.expenses.forEach((exp) => {
+      const div = document.createElement('div');
+      div.classList.add('expense-item');
+      div.innerHTML = `
+        <input type="text" class="expense-name" value="${exp.name}" />
+        <input type="number" class="expense-value" value="${exp.value}" />
+        <button type="button" class="remove-expense">✕</button>
+      `;
+      expensesContainer.appendChild(div);
+    });
+  }
+
+  // Load Savings Data
+  const savingsData = JSON.parse(localStorage.getItem(getProfileKey('savings'))) || null;
+  if (savingsData) {
+    document.getElementById('goal').value = savingsData.goal || '';
+    document.getElementById('monthly').value = savingsData.monthly || '';
+  }
+}
 
 // -------------------- Utilities --------------------
 function qs(sel) {
@@ -528,6 +605,106 @@ document.addEventListener('DOMContentLoaded', async () => {
       qs('#contact-form').reset();
     });
   }
+  /* ===== Profile UI wiring - REPLACE previous profile wiring with this block ===== */
+  (function () {
+    // helpers for profile list persistence (array of profile names)
+    function getProfiles() {
+      try {
+        return JSON.parse(localStorage.getItem('smartsave_profiles') || '[]');
+      } catch (e) {
+        console.warn('Error reading smartsave_profiles', e);
+        return [];
+      }
+    }
+    function saveProfiles(list) {
+      localStorage.setItem('smartsave_profiles', JSON.stringify(list));
+    }
+
+    // Add profile to list (if new) and activate it (calls existing setProfile if available)
+    function addOrActivateProfile(name) {
+      const trimmed = (name || '').trim();
+      if (!trimmed) return;
+      const profiles = getProfiles();
+      if (!profiles.includes(trimmed)) {
+        profiles.push(trimmed);
+        saveProfiles(profiles);
+      }
+
+      // Prefer using the existing setProfile() function (it sets activeProfile + loads data)
+      if (typeof setProfile === 'function') {
+        setProfile(trimmed);
+      } else {
+        localStorage.setItem('smartsave_activeProfile', trimmed);
+        if (typeof loadProfileData === 'function') loadProfileData();
+        // update UI element if present
+        const ap = document.querySelector('#active-profile');
+        if (ap) ap.textContent = trimmed;
+      }
+      refreshProfileDropdown();
+    }
+
+    // DOM elements (support both naming variants that exist in your HTML)
+    const profileNameInput = qs('#profileName') || qs('#profile-name');
+    const setProfileBtn = qs('#setProfile') || qs('#set-profile');
+    const profileSelect = qs('#profileSelect');
+
+    // Wire the "Set Profile" button (works with either input id)
+    if (setProfileBtn && profileNameInput) {
+      setProfileBtn.addEventListener('click', () => {
+        const name = (profileNameInput.value || '').trim();
+        if (!name) return;
+        addOrActivateProfile(name);
+        profileNameInput.value = ''; // optional: clear after set
+      });
+    }
+
+    // Wire dropdown change to activate selected profile
+    if (profileSelect) {
+      profileSelect.addEventListener('change', (e) => {
+        const chosen = e.target.value;
+        if (!chosen) return;
+        addOrActivateProfile(chosen);
+      });
+    }
+
+    // Populate dropdown + active profile display
+    function refreshProfileDropdown() {
+      if (!profileSelect) return;
+      const profiles = getProfiles();
+      profileSelect.innerHTML = '<option value="">-- Select Profile --</option>';
+      profiles.forEach((p) => {
+        const opt = document.createElement('option');
+        opt.value = p;
+        opt.textContent = p;
+        profileSelect.appendChild(opt);
+      });
+
+      const active = localStorage.getItem('smartsave_activeProfile');
+      const apEl = document.querySelector('#active-profile');
+      if (active) {
+        profileSelect.value = active;
+        if (apEl) apEl.textContent = active;
+      } else {
+        if (apEl) apEl.textContent = 'None';
+      }
+    }
+
+    // Initialize dropdown and auto-load last active profile (if any)
+    refreshProfileDropdown();
+    const last = localStorage.getItem('smartsave_activeProfile');
+    if (last) {
+      // reuse setProfile if available so loadProfileData() runs through your existing logic
+      if (typeof setProfile === 'function') setProfile(last);
+      else {
+        if (typeof loadProfileData === 'function') loadProfileData();
+        const apEl = document.querySelector('#active-profile');
+        if (apEl) apEl.textContent = last;
+      }
+      // make sure dropdown shows the active one
+      if (profileSelect) profileSelect.value = last;
+    }
+  })();
+  /* ===== end profile UI wiring block ===== */
 }); // end DOMContentLoaded
 
 // Helper to build CSV from impact data

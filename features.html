@@ -24,6 +24,22 @@
 
     <main class="container">
       <section class="features-intro">
+        <!-- Profile Selector -->
+        <section id="profile-section" class="feature-card">
+          <h2>Profile</h2>
+          <div class="profile-controls">
+            <input type="text" id="profileName" placeholder="Enter profile name" />
+            <button id="setProfile">Set Profile</button>
+
+            <select id="profileSelect">
+              <option value="">-- Select Profile --</option>
+            </select>
+          </div>
+
+          <p class="small-muted">Data will be saved locally for this profile only.</p>
+          <p>Active Profile: <strong id="active-profile">None</strong></p>
+        </section>
+
         <h1>Features</h1>
         <p class="small-muted">Try the tools below everything is client-side and demo-ready.</p>
       </section>
